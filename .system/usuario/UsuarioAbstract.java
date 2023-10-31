@@ -5,9 +5,8 @@ import system.Jogo;
 public abstract class UsuarioAbstract implements Serializable{
   private String nome;
   private double creditos;
-  private Vector<Jogo> vectorJogos;
 
-  public UsuarioAbstract(String nome){
+  public UsuarioAbstract(String nome, double creditos){
     this.nome = nome;
     this.creditos = 0.0;
   }
@@ -33,10 +32,5 @@ public abstract class UsuarioAbstract implements Serializable{
       throw new VNException(nome, creditos);
   }
   
-  public String getJogos(){
-   return null; 
-  }
-  
-  //public void 
 }
   
