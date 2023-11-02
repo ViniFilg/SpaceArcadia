@@ -10,10 +10,15 @@ import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 
+import system.Jogo;
+
+import system.usuario.exceptions.SIException;
+import system.usuario.exceptions.VNException;
+
 public class RepositorioUsuario {
   private Vector<UsuarioAbstract> usuarios;
 
-  public RepositoriouUsuario(){
+  public RepositorioUsuario(){
     usuarios = new Vector<UsuarioAbstract>();
     desserializar();
   }
@@ -42,7 +47,7 @@ public class RepositorioUsuario {
       return false;
   }
 
-  public usuario procurar(String nome) {
+  public UsuarioAbstract procurar(String nome) {
     for (int i = 0; i < usuarios.size(); i++) {
       if (usuarios.get(i).getNome().equals(nome))
         return usuarios.get(i);
@@ -50,13 +55,38 @@ public class RepositorioUsuario {
     return null;
   }
 
+  public void creditar(String nome, double valor) throws VNException {
+    if(existe(nome)){
+      UsuarioAbstract user = procurar(nome);
+      user.creditar(valor);
+      serializar();
+    }
+  }
+
+  public void debitar(String nome, double valor) throws VNException, SIException {
+    if(existe(nome)){
+      UsuarioAbstract user = procurar(nome);
+      user.debitar(valor);
+      serializar();
+    }
+  }
+
+  public void inserirJogo(String nome, Jogo jogo) {
+    if(existe(nome)){
+      UsuarioAbstract user = procurar(nome);
+      ((UsuarioPadrao)user).inserir(jogo);
+      serializar();
+    }
+  }
+
   public void apresentarusuario(String nome) {
     if (existe(nome)) {
-      usuario usuario = procurar(nome);
+      UsuarioAbstract usuario = procurar(nome);
       System.out.println("Nome do usuario: " + usuario.getNome());
-      System.out.println("Créditos do usuario: " + usuario.getValor());
+      System.out.println("Créditos do usuario: " + usuario.getCreditos());
       System.out.println("Jogos do usuario: ");
-      for (Jogo jogo : usuario.getJogos()) {
+      for (Jogo jogo : ((UsuarioPadrao)usuario).getJogos()) {
+        
         System.out.println(jogo.getNome());
       }
     }

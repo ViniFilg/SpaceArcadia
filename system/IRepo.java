@@ -1,3 +1,5 @@
+package system;
+
 interface IRepo{
   public void inserir(Jogo jogo);
   public void remover(String nome);

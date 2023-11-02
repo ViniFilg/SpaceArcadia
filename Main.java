@@ -1,7 +1,13 @@
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.Border;
+
+import system.gui.Login;
+
 class Main {
-  public static void main(String[] args) {
-    System.out.println("Hello world!");
+  public static void main(String[] args) throws Exception{
     Teste teste = new Teste();
-    teste.TestaRepositorio();
+    new Login();
   }
 }
+

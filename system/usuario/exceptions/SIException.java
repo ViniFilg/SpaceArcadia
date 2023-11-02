@@ -1,3 +1,5 @@
+package system.usuario.exceptions;
+
 public class SIException extends Exception {
   private String nome;
   private double saldo;
