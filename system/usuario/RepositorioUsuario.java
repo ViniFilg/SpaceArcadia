@@ -14,6 +14,8 @@ import system.Jogo;
 
 import system.usuario.exceptions.SIException;
 import system.usuario.exceptions.VNException;
+import system.usuario.exceptions.UDNEException;
+import system.usuario.exceptions.IPException;
 
 public class RepositorioUsuario {
   private Vector<UsuarioAbstract> usuarios;
@@ -90,6 +92,20 @@ public class RepositorioUsuario {
         System.out.println(jogo.getNome());
       }
     }
+  }
+
+  public boolean validar(String nome, String senha) throws IPException, UDNEException {
+    if(existe(nome)){
+      UsuarioAbstract usuario = procurar(nome);
+      if(usuario.getSenha().equals(senha)){
+        return true; //O nome do Usuário e da senha são válidos
+      } else{
+        throw new IPException("Senha inválida");
+      }
+    }else{
+      throw new UDNEException("Nome de usuário não existe");
+    }
+    
   }
 
   private void serializar() {

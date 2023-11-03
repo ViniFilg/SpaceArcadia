@@ -14,6 +14,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form login
      */
     public Login() {
+        super("SpaceArcadia");
         initComponents();
     }
 

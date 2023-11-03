@@ -7,7 +7,7 @@ import system.gui.Login;
 class Main {
   public static void main(String[] args) throws Exception{
     Teste teste = new Teste();
-    new Login();
+    new Login().setVisible(true);
   }
 }
 
