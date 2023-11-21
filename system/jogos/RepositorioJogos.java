@@ -1,4 +1,4 @@
-package system;
+package system.jogos;
 import java.util.Vector;
 
 import java.io.File;
@@ -9,21 +9,30 @@ import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 
+import system.jogos.Jogo;
+
+import system.jogos.exceptions.JIException;
+import system.jogos.exceptions.JEException;
+
 public class RepositorioJogos implements IRepo{
   private Vector<Jogo> jogos;
 
-  public RepositorioJogos(){
+  public RepositorioJogos() {
     jogos = new Vector<Jogo>();
-    desserializar();
+    try{
+      desserializar();
+    } catch(Exception e){
+      e.printStackTrace();
+    }
   }
   
-  public void inserir(Jogo jogo){
+  public void inserir(Jogo jogo) throws JEException{
     if(!existe(jogo.getNome())){
       jogos.add(jogo);
       serializar();
     }
     else{
-        
+      throw new JEException(jogo.getNome());
     }
   }
 
@@ -33,6 +42,34 @@ public class RepositorioJogos implements IRepo{
       removerArquivo(nome);
       serializar();
     }
+  }
+
+  public void editarJogo(String nome, String novoNome, Double novoValor, String novaDescricao) {
+      if (existe(nome)) {
+          Jogo jogo = procurar(nome);
+
+          // Abaixo, verificamos se o nome que foi fornecido não é igual ao nome atual
+          if (novoNome != null && !novoNome.equals(jogo.getNome())) {
+              // Logo abaixo, é verificado se o novo nome já existe em outros jogos
+              if (!existe(novoNome)) {
+                  jogo.setNome(novoNome);
+                  removerArquivo(nome);
+              } else {
+                  System.out.println("Jogo com o novo nome já existe. Escolha um nome diferente.");
+                  return;
+              }
+          }
+
+          if (novoValor != null) {
+              jogo.setValor(novoValor);
+          }
+
+          if (novaDescricao != null) {
+              jogo.setDescricao(novaDescricao);
+          }
+
+          serializar();
+      }
   }
 
   public boolean existe(String nome){
@@ -76,7 +113,7 @@ public class RepositorioJogos implements IRepo{
     }
   }
 
-  private void desserializar() {
+  private void desserializar() throws JEException{
     File arquivoConta = new File("./arquivo/jogos.bin");
 
     if(arquivoConta.listFiles() != null){
@@ -106,3 +143,4 @@ public class RepositorioJogos implements IRepo{
     conta.delete();
   }
 }
+

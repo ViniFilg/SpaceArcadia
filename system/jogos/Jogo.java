@@ -1,4 +1,4 @@
-package system;
+package system.jogos;
 import java.io.Serializable;
 
 public class Jogo implements Serializable{
@@ -8,7 +8,7 @@ public class Jogo implements Serializable{
   private String descricao;
 
   
-  public Jogo(String nome, double valor, String descricao) {
+  public Jogo(String nome, double  valor, String descricao) {
     this.nome = nome;
     this.valor = valor;
     this.descricao = descricao;

@@ -1,5 +1,5 @@
-import system.Jogo;
-import system.RepositorioJogos;
+import system.jogos.Jogo;
+import system.jogos.RepositorioJogos;
 
 import system.usuario.RepositorioUsuario;
 import system.usuario.UsuarioAbstract;
@@ -9,9 +9,13 @@ public class Teste{
   public void TestaRepositorio(){
     Jogo SoTC = new Jogo("Shadow of The Colossus", 250, "Shadow of The colossus é um jogo \n no qual você tem que matar titãs para ressuscitar a princesa que foi morta como sacrifício pela sua tribo");
     RepositorioJogos repo = new RepositorioJogos();
-    repo.inserir(SoTC);
-    repo.apresentarJogo("Shadow of The Colossus");
+    try{
+      repo.inserir(SoTC);
+    } catch(Exception e){
+      e.printStackTrace();
+    }
   }
+
   
   public void TestaDesserializacao(){
     RepositorioJogos repo = new RepositorioJogos();

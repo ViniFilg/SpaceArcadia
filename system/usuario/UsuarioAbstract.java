@@ -2,17 +2,18 @@ package system.usuario;
 
 import java.io.Serializable;
 import java.util.Vector;
-import system.Jogo;
+import system.jogos.Jogo;
 
 import system.usuario.exceptions.SIException;
 import system.usuario.exceptions.VNException;
+import system.usuario.exceptions.UEException;
 
-public abstract class UsuarioAbstract implements Serializable {
+  public abstract class UsuarioAbstract implements Serializable{
   private String nome;
   private double creditos;
   private String senha;
 
-  public UsuarioAbstract(String nome, double creditos, String senha) {
+  public UsuarioAbstract(String nome, String senha) {
     this.nome = nome;
     this.senha = senha;
     this.creditos = 0.0;

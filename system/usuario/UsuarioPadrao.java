@@ -2,7 +2,7 @@ package system.usuario;
 
 import java.io.Serializable;
 import java.util.Vector;
-import system.Jogo;
+import system.jogos.Jogo;
 
 import java.io.Serializable;
 
@@ -10,8 +10,8 @@ public class UsuarioPadrao extends UsuarioAbstract implements Serializable{
 
   private Vector<Jogo> jogos;
 
-  public UsuarioPadrao(String nome, double creditos, String senha){
-    super(nome, creditos, senha);
+  public UsuarioPadrao(String nome, String senha){
+    super(nome, senha);
     jogos = new Vector<Jogo>();
   }
 

@@ -1,4 +1,4 @@
-import system.Jogo;
+import system.jogos.Jogo;
 import java.util.Vector;
 
 interface IArcadia{

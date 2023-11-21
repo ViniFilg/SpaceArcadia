@@ -10,9 +10,10 @@ import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 
-import system.Jogo;
+import system.jogos.Jogo;
 
 import system.usuario.exceptions.SIException;
+import system.usuario.exceptions.UEException;
 import system.usuario.exceptions.VNException;
 import system.usuario.exceptions.UDNEException;
 import system.usuario.exceptions.IPException;
@@ -25,12 +26,12 @@ public class RepositorioUsuario {
     desserializar();
   }
 
-  public void inserir(UsuarioAbstract usuario) {
+  public void inserir(UsuarioAbstract usuario) throws UEException{
     if (!existe(usuario.getNome())) {
       usuarios.add(usuario);
       serializar();
     } else {
-
+      throw new UEException(usuario.getNome());
     }
   }
 
@@ -125,7 +126,7 @@ public class RepositorioUsuario {
     }
   }
 
-  private void desserializar() {
+  private void desserializar(){
     File arquivoConta = new File("./arquivo/usuarios.bin");
 
     if (arquivoConta.listFiles() != null) {
@@ -134,7 +135,11 @@ public class RepositorioUsuario {
           ObjectInputStream conversor = new ObjectInputStream(new FileInputStream(file));
           UsuarioAbstract usuario = (UsuarioAbstract) conversor.readObject();
           if (!existe(usuario.getNome()))
-            inserir(usuario);
+            try{
+              inserir(usuario);
+            } catch(Exception e){
+              e.printStackTrace();
+            }
           conversor.close();
 
         } catch (ClassNotFoundException fnfe) {
