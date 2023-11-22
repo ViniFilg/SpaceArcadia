@@ -53,8 +53,10 @@ public class Login extends javax.swing.JFrame {
         setTitle("SpaceArcadia");
         setPreferredSize(new java.awt.Dimension(600, 400));
         setResizable(false);
+        GradientPanel gradient = new GradientPanel();
+        setContentPane(gradient);
 
-        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 153, 255, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 400));
 
         jLabel6.setFont(new java.awt.Font("Agency FB", 0, 36)); // NOI18N
@@ -72,7 +74,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(45, 45, 45)
                         .addComponent(jLabel8))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel6)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );

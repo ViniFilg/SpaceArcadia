@@ -72,7 +72,7 @@ public class Register extends javax.swing.JFrame {
                         .addGap(45, 45, 45)
                         .addComponent(jLabel8))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel6)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
