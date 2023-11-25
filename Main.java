@@ -5,6 +5,7 @@ import javax.swing.border.Border;
 import system.gui.Login;
 import system.gui.UsuarioADM;
 import system.gui.TemplateJogo;
+import system.gui.GradientPanel;
 
 
 import system.usuario.RepositorioUsuario;

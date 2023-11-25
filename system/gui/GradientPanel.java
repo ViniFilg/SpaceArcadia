@@ -15,17 +15,17 @@ import javax.swing.Timer;
 /** @see https://stackoverflow.com/q/45603312/230513 */
 public class GradientPanel extends JPanel {
 
-  private static final int WIDE = 600;
+  private static final int WIDE = 300;
   private static final int HIGH = 400;
-  private static final float HUE_MIN = 0.5f;
-  private static final float HUE_MAX = 0.6f;
-  private final Timer timer;
+  private static final float HUE_MIN = 0.55f;
+  private static final float HUE_MAX = 0.60f;
+  public Timer timer;
   private float hue = HUE_MIN;
   private Color color1 = Color.white;
   private Color color2 = Color.black;
-  private float delta = 0.003f;
+  private float delta = 0.0001f;
 
-  GradientPanel() {
+  public GradientPanel() {
     ActionListener action = new ActionListener() {
 
       @Override
@@ -52,7 +52,7 @@ public class GradientPanel extends JPanel {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
     GradientPaint p = new GradientPaint(
-        0, 0, color1, getWidth(), 0, color2);
+        0, 0, color1, getWidth(), getHeight(), color2);
     g2d.setPaint(p);
     g2d.fillRect(0, 0, getWidth(), getHeight());
   }

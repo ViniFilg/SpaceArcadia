@@ -482,8 +482,14 @@ public class UsuarioADM extends javax.swing.JFrame {
 
   private void btnEXCLUIRJogoActionPerformed(java.awt.event.ActionEvent evt) {
 
-    JOptionPane.showMessageDialog(this, "JOGO EXCLUIDO");
-    JOptionPane.showMessageDialog(this, "JOGO INEXISTENTE");
+    RepositorioJogos repo = new RepositorioJogos();
+    String nomeJogo = txtFExcluirJogo.getText();
+    Jogo jogo = repo.procurar(nomeJogo);
+    if(jogo != null){
+      // EXCLUIR JOGO
+    } else{
+      JOptionPane.showMessageDialog(this, "O jogo " + nomeJogo + " não existe!");
+    }
 
   }
 
