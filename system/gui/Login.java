@@ -11,8 +11,8 @@ public class Login extends javax.swing.JFrame {
 
   public Login(RepositorioUsuario repo) {
         this.gradient = new GradientPanel();
-        initComponents();
         this.repo = repo;
+        initComponents();
   }
                         
     private void initComponents() {
@@ -181,14 +181,18 @@ public class Login extends javax.swing.JFrame {
         new Register(repo).setVisible(true);
     }                                     
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                      
-      if (jTextField1.getText().equals("ADM") && jPasswordField.getText().equals("ADM")) {
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {       
+      String nomeUsuario = jTextField1.getText();
+      String senhaUsuario = jPasswordField.getText();
+      if (nomeUsuario.equals("ADM") && senhaUsuario.equals("ADM")) {
         new UsuarioADM().setVisible(true);
         this.dispose();
-      } 
-      else if (jTextField1.getText().equals("padrao") && jPasswordField.getText().equals("padrao")) {
-        new UsuarioPadrao().setVisible(true);
-        this.dispose();
+      } else if(repo.existe(nomeUsuario)){
+        UsuarioAbstract usuario = repo.procurar(nomeUsuario);
+        if(usuario.getSenha().equals(senhaUsuario)){
+          new Catalogo(usuario).setVisible(true);
+          this.dispose();
+        }
       }
     }                                    
 

@@ -87,13 +87,8 @@ public class RepositorioJogos implements IRepo{
     return null;
   }
 
-  public void apresentarJogo(String nome){
-    if(existe(nome)){
-      Jogo jogo = procurar(nome);
-      System.out.println("Nome do jogo: " + jogo.getNome());
-      System.out.println("Valor do jogo: " + jogo.getValor());
-      System.out.println("Descrição do jogo: " + jogo.getDescricao());
-    }
+  public Vector<Jogo> getJogos(){
+    return jogos;
   }
 
   private void serializar() {

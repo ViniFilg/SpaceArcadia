@@ -19,7 +19,6 @@ public class Teste{
   
   public void TestaDesserializacao(){
     RepositorioJogos repo = new RepositorioJogos();
-    repo.apresentarJogo("Shadow of The Colossus");
     repo.remover("Shadow of The Colossus");
   }
 

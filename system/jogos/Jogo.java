@@ -15,7 +15,7 @@ public class Jogo implements Serializable {
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;
-        this.comentarios = new Vector<>(); 
+        this.comentarios = new Vector<Comentario>(); 
     }
 
     public String getNome() {
@@ -51,4 +51,13 @@ public class Jogo implements Serializable {
     public void adicionarComentario(Comentario comentario) {
         comentarios.add(comentario);
     }
+
+  public void comentar(String nomeUsuario, String textoComentario) throws CLEException{
+    if (textoComentario.length() > 300) {
+        throw new CLEException("Limite de 300 caracteres para o comentário excedido");
+    } else{
+      Comentario comentario = new Comentario(nomeUsuario, textoComentario);
+      adicionarComentario(comentario);
+    }
+  }
 }
