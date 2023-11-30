@@ -68,6 +68,8 @@ public class Comentarios extends javax.swing.JFrame {
 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SpaceArcadia");
+        setResizable(false);
 
         btnEnviar.setForeground(new java.awt.Color(0, 51, 102));
         btnEnviar.setBorderPainted(false);

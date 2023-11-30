@@ -39,6 +39,8 @@ public class Login extends javax.swing.JFrame {
             jLabel2 = new javax.swing.JLabel();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            setTitle("SpaceArcadia");
+            setResizable(false);
 
             jPanel2.setOpaque(false);
 
