@@ -19,6 +19,10 @@ import system.usuario.exceptions.UEException;
     this.creditos = 0.0;
   }
 
+  public void setNome(String nome){
+    this.nome = nome;
+  }
+
   public String getNome(){
     return nome;
   }
@@ -36,14 +40,14 @@ import system.usuario.exceptions.UEException;
   }
 
   public void creditar(double valor) throws VNException {
-    if (valor > 0)
+    if (valor >= 0)
       this.creditos += valor;
     else
       throw new VNException(nome, creditos);
   }
 
   public void debitar(double valor) throws VNException, SIException {
-    if (valor > 0)
+    if (valor >= 0)
       if (this.creditos >= valor)
         this.creditos -= valor;
       else

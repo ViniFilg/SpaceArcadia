@@ -4,6 +4,8 @@ import system.jogos.RepositorioJogos;
 import system.usuario.RepositorioUsuario;
 import system.usuario.UsuarioAbstract;
 import system.usuario.UsuarioPadrao;
+import system.usuario.UsuarioAdm;
+import system.jogos.Comentario;
 
 public class Teste{
   public void TestaRepositorio(){
@@ -22,16 +24,26 @@ public class Teste{
     repo.remover("Shadow of The Colossus");
   }
 
-  public void TestaRepoUsuario(){
+  public void inserirAdm(){
+    UsuarioAdm adm = new UsuarioAdm("ADM", "ADM");
     RepositorioUsuario repo = new RepositorioUsuario();
-    UsuarioAbstract user = repo.procurar("João");
-    RepositorioJogos repoJogos = new RepositorioJogos();
-    
     try{
-      repo.inserirJogo("João", repoJogos.procurar("Shadow of The Colossus"));
+      repo.inserir(adm);
     } catch(Exception e){
-
+      
     }
-    repo.apresentarusuario("João");
+
   }
+
+  public void TestaComentario(){
+    RepositorioJogos repo = new RepositorioJogos();
+    Jogo SoTC = repo.procurar("Shadow of The Colossus");
+    SoTC.getComentarios().clear();
+    Comentario comentario = new Comentario("Renan", "Que jogo foda!");
+    try{
+    repo.adicionarComentario(SoTC.getNome(), comentario);
+    } catch(Exception e){
+      e.printStackTrace();
+    }
+}
 }

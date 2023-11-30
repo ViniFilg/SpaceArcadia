@@ -17,6 +17,7 @@ public class CriarJogo extends javax.swing.JFrame {
      * Creates new form CriarJogo
      */
     public CriarJogo() {
+        
         initComponents();
         this.setTitle("SpaceArcadia");
     }
@@ -214,8 +215,7 @@ public class CriarJogo extends javax.swing.JFrame {
           Jogo jogo = new Jogo(nome, Double.parseDouble(valor), descricao);
           jogos.inserir(jogo);
           JOptionPane.showMessageDialog(this, "JOGO CADASTRADO COM SUCESSO");
-          this.dispose();
-          new UsuarioADM().show();
+          
         } catch(JEException e){
           JOptionPane.showMessageDialog(this, "O JOGO " + e.getNome() + " JÁ EXISTE!");
         }

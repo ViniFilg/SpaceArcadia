@@ -13,6 +13,10 @@ import system.gui.CriarJogo;
 import system.gui.EditarJogo;
 import system.gui.Login;
 import system.usuario.RepositorioUsuario;
+import system.usuario.UsuarioPadrao;
+import system.usuario.UsuarioAbstract;
+import system.usuario.UsuarioAdm;
+import system.usuario.exceptions.UDNEException;
 import system.jogos.Jogo;
 import system.jogos.RepositorioJogos;
 import system.jogos.exceptions.JIException;
@@ -28,6 +32,8 @@ public class UsuarioADM extends javax.swing.JFrame {
    */
   public UsuarioADM() {
 
+    repoUser = new RepositorioUsuario();
+    userAdm = repoUser.procurar("ADM");
     initComponents();
     this.setTitle("SpaceArcadia");
   }
@@ -91,7 +97,7 @@ public class UsuarioADM extends javax.swing.JFrame {
 
     txtCreditos.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
     txtCreditos.setForeground(new java.awt.Color(0, 0, 0));
-    txtCreditos.setText("0,00");
+    txtCreditos.setText("");
 
     jLabel7.setBackground(new java.awt.Color(0, 255, 255));
     jLabel7.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
@@ -185,9 +191,9 @@ public class UsuarioADM extends javax.swing.JFrame {
     panelCreditos1.setBackground(new java.awt.Color(102, 156, 255));
     panelCreditos1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-    txtCreditos1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+    txtCreditos1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
     txtCreditos1.setForeground(new java.awt.Color(0, 0, 0));
-    txtCreditos1.setText("0,00");
+    txtCreditos1.setText(Double.toString(userAdm.getCreditos()));
 
     jLabel9.setBackground(new java.awt.Color(0, 255, 255));
     jLabel9.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
@@ -264,6 +270,11 @@ public class UsuarioADM extends javax.swing.JFrame {
     btnEXCLUIRJogo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
     btnEXCLUIRJogo.setForeground(new java.awt.Color(0, 0, 0));
     btnEXCLUIRJogo.setText("EXCLUIR");
+    btnEXCLUIRJogo.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnEXCLUIRJogoActionPerformed(evt);
+      }
+    });
 
     btnEditarJogo.setBackground(new java.awt.Color(102, 156, 255));
     btnEditarJogo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -450,7 +461,7 @@ public class UsuarioADM extends javax.swing.JFrame {
 
   private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {
     this.dispose();
-    new Login(new RepositorioUsuario()).setVisible(true);
+    new Login().setVisible(true);
   }
 
   private void btnCriarJogoActionPerformed(java.awt.event.ActionEvent evt) {
@@ -486,7 +497,13 @@ public class UsuarioADM extends javax.swing.JFrame {
     String nomeJogo = txtFExcluirJogo.getText();
     Jogo jogo = repo.procurar(nomeJogo);
     if(jogo != null){
-      // EXCLUIR JOGO
+      repo.remover(jogo.getNome());
+      for(UsuarioAbstract usuario : repoUser.getUsuarios()){
+        if(usuario instanceof UsuarioPadrao){
+          repoUser.removerJogo(usuario.getNome(), jogo.getNome());
+        }
+      }
+      JOptionPane.showMessageDialog(this, "Jogo excluído!");
     } else{
       JOptionPane.showMessageDialog(this, "O jogo " + nomeJogo + " não existe!");
     }
@@ -499,8 +516,12 @@ public class UsuarioADM extends javax.swing.JFrame {
   }
 
   private void btnEXCLUIRUsuarioActionPerformed(java.awt.event.ActionEvent evt) {
-    JOptionPane.showMessageDialog(this, "USUÁRIO EXCLUIDO");
-    JOptionPane.showMessageDialog(this, "USUÁRIO INEXISTENTE");
+    try{
+      repoUser.remover(txtFExcluirUsuario.getText());
+      JOptionPane.showMessageDialog(this, "Usuário Excluído!");
+    } catch(UDNEException e){
+      JOptionPane.showMessageDialog(this, "O usuário " + txtFExcluirUsuario.getText() + " não existe!");
+    }
   }
 
   /**
@@ -571,5 +592,7 @@ public class UsuarioADM extends javax.swing.JFrame {
   private javax.swing.JTextField txtFExcluirUsuario;
   private javax.swing.JLabel txtJ1;
   private javax.swing.JLabel txtOpcAdm;
+  private RepositorioUsuario repoUser;
+  private UsuarioAbstract userAdm;
   // End of variables declaration
 }

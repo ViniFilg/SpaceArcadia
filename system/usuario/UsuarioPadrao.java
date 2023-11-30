@@ -28,6 +28,13 @@ public class UsuarioPadrao extends UsuarioAbstract implements Serializable{
     }
   }
 
+  public void remover(String nomeJogo){
+    Jogo jogo = procurarJogo(nomeJogo);
+    if(jogo != null){
+      jogos.remove(jogo);
+    }
+  }
+  
   public Jogo procurarJogo(String nome){
     for(int i = 0; i < jogos.size(); i++){
       if(jogos.get(i).getNome().equals(nome))

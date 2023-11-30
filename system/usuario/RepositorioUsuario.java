@@ -35,11 +35,13 @@ public class RepositorioUsuario {
     }
   }
 
-  public void remover(String nome) {
+  public void remover(String nome) throws UDNEException {
     if (existe(nome)) {
       usuarios.remove(procurar(nome));
       removerArquivo(nome);
       serializar();
+    } else{
+      throw new UDNEException(nome);
     }
   }
 
@@ -48,6 +50,10 @@ public class RepositorioUsuario {
       return true;
     else
       return false;
+  }
+
+  public Vector<UsuarioAbstract> getUsuarios(){
+    return usuarios;
   }
 
   public UsuarioAbstract procurar(String nome) {
@@ -61,8 +67,10 @@ public class RepositorioUsuario {
   public void creditar(String nome, double valor) throws VNException {
     if(existe(nome)){
       UsuarioAbstract user = procurar(nome);
-      user.creditar(valor);
+      user.creditar(valor); 
       serializar();
+    } else{
+      throw new VNException(nome, valor);
     }
   }
 
@@ -70,6 +78,14 @@ public class RepositorioUsuario {
     if(existe(nome)){
       UsuarioAbstract user = procurar(nome);
       user.debitar(valor);
+      serializar();
+    }
+  }
+
+  public void removerJogo(String nome, String nomeJogo){
+    if(existe(nome)){
+      UsuarioAbstract user = procurar(nome);
+      ((UsuarioPadrao)user).remover(nomeJogo);
       serializar();
     }
   }
@@ -93,6 +109,23 @@ public class RepositorioUsuario {
         System.out.println(jogo.getNome());
       }
     }
+  }
+
+  public void mudarNome(String nome, String novoNome) throws UEException {
+    if (!existe(novoNome) && novoNome.length() > 0) {
+      UsuarioAbstract usuario = procurar(nome);
+      usuario.setNome(novoNome);
+      removerArquivo(nome);
+      serializar();
+    } else {
+      throw new UEException(nome);
+    }
+  }
+
+  public void mudarSenha(String nome, String novaSenha) {
+    UsuarioAbstract usuario = procurar(nome);
+    usuario.setSenha(novaSenha);
+    serializar();
   }
 
   public boolean validar(String nome, String senha) throws IPException, UDNEException {

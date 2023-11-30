@@ -7,6 +7,9 @@ package system.gui;
 import system.gui.UsuarioADM;
 import system.jogos.Jogo;
 import system.jogos.RepositorioJogos;
+import system.usuario.RepositorioUsuario;
+import system.usuario.UsuarioPadrao;
+import system.usuario.UsuarioAbstract;
 import system.jogos.IRepo;
 
 /**
@@ -203,8 +206,21 @@ public class EditarJogo extends javax.swing.JFrame {
     String descricao = txtFDescricaoEditar.getText();
 
     IRepo repo = new RepositorioJogos();
+    RepositorioUsuario repoUser = new RepositorioUsuario();
     ((RepositorioJogos) repo).editarJogo(jogo.getNome(), nome, Double.parseDouble(valor), descricao);
-    jogo = repo.procurar(nome);
+    Jogo jogoNovo = repo.procurar(nome);
+    for (UsuarioAbstract user : repoUser.getUsuarios()){
+      if(user instanceof UsuarioPadrao){
+        for(Jogo jogoUser : ((UsuarioPadrao)user).getJogos()){
+          if(jogoUser.getNome().equals(jogo.getNome())){
+            repoUser.removerJogo(user.getNome(), jogo.getNome());
+            repoUser.inserirJogo(user.getNome(), jogoNovo);
+          }
+        }
+      }
+    }
+    
+    jogo = jogoNovo;
 
 ;
   }

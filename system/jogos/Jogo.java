@@ -2,7 +2,9 @@ package system.jogos;
 
 import java.io.Serializable;
 import java.util.Vector;
-import system.usuario.Comentario;
+import system.jogos.Comentario;
+
+import system.jogos.exceptions.CLEException;
 
 public class Jogo implements Serializable {
 
@@ -48,8 +50,12 @@ public class Jogo implements Serializable {
         return comentarios;
     }
 
-    public void adicionarComentario(Comentario comentario) {
+    public void adicionarComentario(Comentario comentario) throws CLEException{
+      if (comentario.getComentario().length() > 100) {
+          throw new CLEException("Limite de 100 caracteres para o comentário excedido");
+      } else{
         comentarios.add(comentario);
+      }
     }
 
   public void comentar(String nomeUsuario, String textoComentario) throws CLEException{

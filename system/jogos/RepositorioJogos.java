@@ -13,6 +13,7 @@ import system.jogos.Jogo;
 
 import system.jogos.exceptions.JIException;
 import system.jogos.exceptions.JEException;
+import system.jogos.exceptions.CLEException;
 
 public class RepositorioJogos implements IRepo{
   private Vector<Jogo> jogos;
@@ -55,7 +56,7 @@ public class RepositorioJogos implements IRepo{
                   jogo.setNome(novoNome);
                   removerArquivo(nome);
               } else {
-                  System.out.println("Jogo com o novo nome já existe. Escolha um nome diferente.");
+                  
                   return;
               }
           }
@@ -89,6 +90,12 @@ public class RepositorioJogos implements IRepo{
 
   public Vector<Jogo> getJogos(){
     return jogos;
+  }
+
+  public void adicionarComentario(String nomeJogo, Comentario comentario) throws CLEException{
+    Jogo jogo = procurar(nomeJogo);
+    jogo.adicionarComentario(comentario);
+    serializar();
   }
 
   private void serializar() {
