@@ -2,7 +2,6 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-import system.gui.Login2;
 import system.gui.Login;
 import system.gui.UsuarioADM;
 import system.gui.TemplateJogo;
