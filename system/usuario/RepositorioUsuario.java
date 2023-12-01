@@ -98,18 +98,6 @@ public class RepositorioUsuario {
     }
   }
 
-  public void apresentarusuario(String nome) {
-    if (existe(nome)) {
-      UsuarioAbstract usuario = procurar(nome);
-      System.out.println("Nome do usuario: " + usuario.getNome());
-      System.out.println("Créditos do usuario: " + usuario.getCreditos());
-      System.out.println("Jogos do usuario: ");
-      for (Jogo jogo : ((UsuarioPadrao)usuario).getJogos()) {
-        
-        System.out.println(jogo.getNome());
-      }
-    }
-  }
 
   public void mudarNome(String nome, String novoNome) throws UEException {
     if (!existe(novoNome) && novoNome.length() > 0) {

@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/systemFilesystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/systemFilesystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package system.gui;
 
@@ -108,19 +108,24 @@ public class interfaceComentario extends javax.swing.JPanel {
             .addComponent(jLabel1));
   }// </editor-fold>
 
-  public void Animate(String text) {
+  public void Animate(final String text) {
+	int delay = 100;
+	if(text.length() > 20){
+		delay = 2000/text.length();
+	}
     timer.scheduleAtFixedRate(new TimerTask() {
       @Override
       public void run() {
         if (txtComentario.getText().equals(text)) {
           timer.cancel();
-        }
+        } else {
         String nextChar = Character.toString(text.charAt(txtComentario.getText().length()));
         txtComentario.append(nextChar);
         jPanel1.validate();
         jPanel1.repaint();
+        }
       }
-    }, 500, 100);
+    }, 500, delay);
   }
 
   // Variables declaration - do not modify

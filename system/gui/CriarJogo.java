@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/systemFilesystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/systemFilesystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
 // FALTA: 3 Exceptions criar jogo já existente, text field vazio e text field do valor com letras. 
