@@ -229,7 +229,9 @@ public class Perfil extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nome trocado com sucesso!");
           } catch(UEException e){
             JOptionPane.showMessageDialog(this, "Nome já existente!");
-          }      
+          } catch(Exception e) {
+        	  e.printStackTrace();
+          }
       } else{
         JOptionPane.showMessageDialog(this, "Nome não alterado!");
       }   
@@ -256,9 +258,9 @@ public class Perfil extends javax.swing.JFrame {
 
     private void btnMudarSenhaActionPerformed(java.awt.event.ActionEvent evt) {                                              
         String inputValue = JOptionPane.showInputDialog(this, "Qual será sua nova senha?");
-          if(inputValue != null){
+          if(inputValue != null && inputValue.length() > 0){
             repo.mudarSenha(usuario.getNome(), inputValue);
-            usuario = repo.procurar(inputValue);
+            usuario = repo.procurar(usuario.getNome());
             JOptionPane.showMessageDialog(this, "Senha trocada com sucesso!");
           } else{
             JOptionPane.showMessageDialog(this, "Insira uma senha!");

@@ -11,12 +11,12 @@ import java.util.TimerTask;
  *
  * @author User
  */
-public class interfaceComentario extends javax.swing.JPanel {
+public class InterfaceComentario extends javax.swing.JPanel {
 
   private String nome;
   private String comentario;
 
-  public interfaceComentario(String nome, String comentario) {
+  public InterfaceComentario(String nome, String comentario) {
     this.nome = nome;
     this.comentario = comentario;
     timer = new Timer();

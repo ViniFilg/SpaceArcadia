@@ -4,7 +4,7 @@ import javax.swing.border.Border;
 
 import system.gui.Login;
 import system.gui.UsuarioADM;
-import system.gui.interfaceComentario;
+import system.gui.InterfaceComentario;
 
 
 import system.usuario.RepositorioUsuario;

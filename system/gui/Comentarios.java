@@ -115,7 +115,7 @@ public class Comentarios extends javax.swing.JFrame {
           gbc.gridwidth = GridBagConstraints.REMAINDER;
           gbc.weightx = 1;
           gbc.fill = GridBagConstraints.HORIZONTAL;
-          mainList.add(new interfaceComentario(comentario.getNome(), comentario.getComentario()), gbc, 0);
+          mainList.add(new InterfaceComentario(comentario.getNome(), comentario.getComentario()), gbc, 0);
           mainList.revalidate();
           mainList.repaint();
         }
@@ -174,7 +174,7 @@ public class Comentarios extends javax.swing.JFrame {
           gbc.gridwidth = GridBagConstraints.REMAINDER;
           gbc.weightx = 1;
           gbc.fill = GridBagConstraints.HORIZONTAL;
-          mainList.add(new interfaceComentario(comentario.getNome(), comentario.getComentario()), gbc, 0);
+          mainList.add(new InterfaceComentario(comentario.getNome(), comentario.getComentario()), gbc, 0);
           mainList.revalidate();
           mainList.repaint();
   
